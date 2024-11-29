@@ -7,7 +7,7 @@ function Projects() {
     <Page
       frontMatter={{
         title: 'Projects',
-        description: 'Showcase of my front-end related work.',
+        description: 'A living archive of my web3 journey—blending innovation, practicality, and impactful solutions.',
       }}
       headerImage={<HeaderImage />}
     >
