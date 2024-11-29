@@ -1,0 +1,53 @@
+---
+title: Ethers.js v6 Cheat Codes
+subtitle: Common Code Snippets for Smart Contract Interactions
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Ethers.js v6.
+date: '2024-11-29'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Cheat Codes for Ethers.js v6 🚀
+
+Working with Ethereum smart contracts often requires interaction through JavaScript libraries like **ethers.js**. These cheat codes help you easily write and deploy smart contracts, interact with blockchain networks, and read/write data.
+
+## Installation
+
+```bash
+npm install ethers@6
+
+```
+### Connect to Network
+Example: Connecting to the Ethereum Mainnet
+
+```javascript
+import { ethers } from 'ethers';
+
+const provider = new ethers.JsonRpcProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
+console.log('Connected to Ethereum mainnet');
+
+```
+
+### Wallet Interaction
+Example: Creating a Wallet
+```javascript
+import { ethers } from 'ethers';
+
+const privateKey = 'YOUR_PRIVATE_KEY';
+const wallet = new ethers.Wallet(privateKey);
+console.log('Wallet address:', wallet.address);
+
+```
+
+
+

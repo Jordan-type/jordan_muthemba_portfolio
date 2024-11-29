@@ -15,12 +15,12 @@ function ProjectsContents() {
   return (
     <>
       <SectionTitle
-        title="The dynamic accent colors."
-        caption="tailwindcss-accent"
-        description="Add accent colors for dynamic, flexible color use in your Tailwind CSS project."
+        title="CitizenV2.0 - Smarter Tender Management"
+        caption="Decentralized Solutions"
+        description="Revolutionizing bid and tender management with smart contracts and transparency, built for efficiency and trust."
         button={{
           title: 'learn more',
-          href: '/docs/tailwindcss-accent',
+          href: '/projects/citizenv2',
         }}
       />
       <SectionContent>
@@ -35,7 +35,7 @@ function ProjectsContents() {
                 onClick={() => setCurrentState('github')}
               />
               <SectionButton
-                title="npm package"
+                title="Lisk Scaffold npm package"
                 icon={<NpmIcon className={clsx('my-2 h-16 w-16')} />}
                 description="Install and use the package with ease thanks to its typed options."
                 active={currentState === 'npm'}
@@ -51,27 +51,27 @@ function ProjectsContents() {
                   browserTabs={[
                     {
                       icon: <GitHubIcon className="h-4 w-4" />,
-                      title: 'enjidev/tailwindcss-accent - GitHub',
+                      title: 'atlas - GitHub',
                       isActive: currentState === 'github',
                     },
                     {
                       icon: <NpmIcon className="h-4 w-4" />,
-                      title: 'tailwindcss-accent - npm',
+                      title: 'lisk-scaffold-dapp - npm',
                       isActive: currentState === 'npm',
                     },
                   ]}
                 >
                   {currentState === 'github' && (
                     <GitHubWireframe
-                      author="enjidev"
+                      author="jordan-type"
                       license="MIT"
-                      repository="tailwindcss-accent"
+                      repository="lisk-scaffold-dapp"
                       description="Adds accent colors for more dynamic and flexible color utilization."
                     />
                   )}
                   {currentState === 'npm' && (
                     <NpmWireframe
-                      packageName="tailwindcss-accent"
+                      packageName="lisk-scaffold-dapp"
                       description="Adds accent colors for more dynamic and flexible color utilization."
                       isWithTypeScript
                     />
