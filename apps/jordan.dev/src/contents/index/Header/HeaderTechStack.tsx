@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { m } from 'framer-motion';
 
 import {
+  YarnIcon,
   FigmaIcon,
   FramerMotionIcon,
   NextJsIcon,
@@ -9,6 +10,8 @@ import {
   TailwindCssIcon,
   TypeScriptIcon,
   VSCodeIcon,
+  SolidityIcon,
+  HardhatIcon,
 } from '@/components/Icons';
 
 const animation = {
@@ -69,6 +72,11 @@ function HeaderTechStack() {
           </div>
         </m.li>
         <m.li variants={animation}>
+          <div className={clsx('transition duration-200 hover:text-[#007ACC]')}>
+            <SolidityIcon className={clsx('h-6 w-6')} />
+          </div>
+        </m.li>
+        <m.li variants={animation}>
           <div className={clsx('h-3 w-[1px] bg-slate-300 dark:bg-slate-700')} />
         </m.li>
         <m.li variants={animation}>
@@ -79,6 +87,16 @@ function HeaderTechStack() {
         <m.li variants={animation}>
           <div className={clsx('transition duration-200 hover:text-[#F24E1E]')}>
             <FigmaIcon className={clsx('h-6 w-6')} />
+          </div>
+        </m.li>
+        <m.li variants={animation}>
+          <div className={clsx('transition duration-200 hover:text-[#007ACC]')}>
+            <YarnIcon className={clsx('h-6 w-6')} />
+          </div>
+        </m.li>
+        <m.li variants={animation}>
+          <div className={clsx('transition duration-200 hover:text-[#007ACC]')}>
+            <HardhatIcon className={clsx('h-6 w-6')} />
           </div>
         </m.li>
       </m.ul>
