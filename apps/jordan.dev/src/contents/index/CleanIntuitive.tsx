@@ -6,40 +6,43 @@ import SectionContent from '@/components/sections/SectionContent';
 import SectionTitle from '@/components/sections/SectionTitle';
 
 import TodoItem from '@/contents/index/Cards/TodoItem';
+import ProjectCardIndex from '@/contents/index/Cards/ProjectCardIndex'
 
-import type { TodoItemState } from '@/contents/index/Cards/TodoItem';
+import type { ProjectCardState } from '@/contents/index/Cards/ProjectCardIndex';
+
+// TodoItemState
 
 type Content = {
-  state: TodoItemState;
-  shows: Array<TodoItemState>;
+  state: ProjectCardState;
+  shows: Array<ProjectCardState>;
   title: string;
   description: string;
 };
 
 const content: Array<Content> = [
   {
-    state: 'typography',
-    shows: ['typography'],
-    title: 'Typography',
-    description: 'Selecting the font type, font size, and font weight.',
+    state: 'smartContract',
+    shows: ['smartContract'],
+    title: 'Smart Contract Architecture',
+    description: 'Crafting efficient, secure, and scalable blockchain-based contracts for transparency and trust.',
   },
   {
-    state: 'spacing',
-    shows: ['typography', 'spacing'],
-    title: 'Spacing',
-    description: 'Positioning and adding spacing between elements.',
+    state: 'uxIntegration',
+    shows: ['uxIntegration'],
+    title: 'Seamless UX/UI Integration',
+    description: 'Designing interfaces that blend aesthetics with usability, ensuring accessibility and intuitive user journeys.',
   },
   {
-    state: 'colors',
-    shows: ['typography', 'spacing', 'colors'],
-    title: 'Colors',
-    description: 'Choosing a color scheme with sufficient contrast.',
+    state: 'scalableSolutions',
+    shows: ['scalableSolutions'],
+    title: 'Scalable Solutions',
+    description: 'Developing systems that grow with user needs, from event platforms to decentralized civic tools.',
   },
   {
-    state: 'effects',
-    shows: ['typography', 'spacing', 'colors', 'effects'],
-    title: 'Effects',
-    description: 'Add effects like borders, shadows, rounded corners, etc.',
+    state: 'communityInnovation',
+    shows: ['communityInnovation'],
+    title: 'Community-Driven Innovation',
+    description: 'Building with and for the community, fostering collaboration to solve real-world challenges.',
   },
 ];
 
@@ -50,10 +53,9 @@ function CleanIntuitive() {
     <>
       <header className={clsx('mb-8')}>
         <SectionTitle
-          title="Eye Catching, Modern & Minimalist Design."
-          caption="Clean & Intuitive"
-          description="Keep the User Interface clean with a modern touch without
-            compromising the User Experience."
+          title="Building Scalable, Decentralized, and User-Centric Solutions."
+          caption="Innovative & Impactful"
+          description="Empowering communities with intuitive designs and practical Web3 applications without compromising functionality."
         />
       </header>
       <SectionContent>
@@ -79,26 +81,29 @@ function CleanIntuitive() {
               className={clsx('-mt-8 flex gap-4', 'md:gap-6 lg:top-8 lg:mt-0')}
             >
               <div>
-                <TodoItem
+                <ProjectCardIndex
                   state={
                     currentState
                       ? currentState.shows
-                      : ['typography', 'spacing', 'colors', 'effects']
+                      : ['smartContract', 'uxIntegration', 'scalableSolutions', 'communityInnovation']
                   }
                 />
               </div>
               <div className={clsx('hidden', 'sm:block lg:hidden')}>
-                <TodoItem
+                <ProjectCardIndex
                   state={
                     currentState
                       ? currentState.shows
-                      : ['typography', 'spacing', 'colors', 'effects']
+                      : ['smartContract', 'uxIntegration', 'scalableSolutions', 'communityInnovation']
                   }
-                  title="UI Implementation"
-                  description="Start creating UI components using React and Tailwind CSS."
-                  date="10:00 AM · Tomorrow"
-                  tag1="Design"
-                  tag2="Components"
+                  title={currentState?.title || 'Smart Contract Architecture'}
+                  description={
+                    currentState?.description ||
+                    'Crafting efficient, secure, and scalable blockchain-based contracts for transparency and trust.'
+                  }
+                  date="Available Now"
+                  tag1="Blockchain"
+                  tag2="Innovation"
                 />
               </div>
             </div>

@@ -6,9 +6,9 @@ function PrettyOptimized() {
   return (
     <header className={clsx('mb-8')}>
       <SectionTitle
-        title="Comprehensible and Optimized Code."
+        title="Readable & Performance-Driven."
         caption="Pretty & Optimized"
-        description="Writing clean code is a top priority while keeping it as optimized as possible."
+        description="Crafting clear, optimized, and maintainable code with a commitment to efficiency and scalability, while sharing knowledge to empower others in the development process."
       />
     </header>
   );

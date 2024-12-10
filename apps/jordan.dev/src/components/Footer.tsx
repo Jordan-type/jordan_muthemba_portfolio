@@ -207,6 +207,11 @@ function Footer() {
                       href: '/blog',
                     },
                     {
+                      title: 'Continuum Block',
+                      href: 'https://continuumblock.org/',
+                      label: 'new',
+                    },
+                    {
                       title: 'T.I.L',
                       href: '/today-i-learned',
                       label: 'new',
