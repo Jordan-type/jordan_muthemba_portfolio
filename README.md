@@ -10,7 +10,7 @@
 
 A monorepo for my personal website and projects, built with Turborepo and pnpm.
 
-## 📘 [enji.dev](https://www.enji.dev)
+## 📘 [jordanmuthemba.dev](https://www.jordanmuthemba.dev)
 
 A personal website with a blog, project showcase, and work information.
 
@@ -42,7 +42,7 @@ cd ./enji.dev
 Next, copy the development version of the `env` file:
 
 ```
-cp ./apps/enji.dev/env.example ./apps/enji.dev/env.local
+cp ./apps/jordan.dev/env.example ./apps/jordan.dev/env.local
 ```
 
 Now, you have the `env.local` file ready for configuration:

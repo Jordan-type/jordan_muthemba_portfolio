@@ -15,7 +15,7 @@ function ProjectsContents() {
   return (
     <>
       <SectionTitle
-        title="CitizenV2.0 - Smarter Tender Management"
+        title="Citizen2.0 - Smarter Tender Management"
         caption="Decentralized Solutions"
         description="Revolutionizing bid and tender management with smart contracts and transparency, built for efficiency and trust."
         button={{
