@@ -1,0 +1,186 @@
+---
+title: Are All Blockchains The Same
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Are All Blockchains The Same.
+date: '2022-07-13'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## **Are all blockchains the same?**
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/?source=post_page---byline--91679e015438--------------------------------)
+
+[Jordan Type](https://medium.com/?source=post_page---byline--91679e015438--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fjordanmuthemba.medium.com%2Fare-all-blockchains-the-same-91679e015438&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--91679e015438---------------------post_header-----------)
+
+5 min read·Jul 13, 2022
+
+“If you’ve ever wondered why sea turtles lay their eggs on the beach, here’s everything you need to know.”
+
+Sorry, I’m not that funny,
+
+We all have interacted with different blockchains as developers or traders and by now those who are keen enough have noticed similarities and differences, but still, there are those who still think they are all the same. Yes, they are the same under the hood, the similarity being cryptography and linking of blocks together. Just like vehicles, they have different sizes, speeds, and purposes and perform special tasks.
+
+There are still similarities in them too like how the breaks and engine work; it is the same concept in all vehicles. To know which vehicle is best and fits within your budget, task and need for speed you have to compare the features. This leads us to how blockchains are classified or grouped into 4 major categories:
+
+1.  **Public blockchain**
+2.  **Private blockchain**
+3.  **Hybrid blockchain**
+4.  **Consortium blockchain**
+
+1.  **Public blockchain**
+
+A public blockchain is a non-restrictive, permission-less distributed ledger system. Anyone who has access to the internet can sign in on a blockchain platform to become an authorized node and be a part of the blockchain network.
+
+**2\. Private blockchain**
+
+A private blockchain is a restrictive or permission blockchain operative only in a closed network. Private blockchains are usually used within an organization or enterprises where only selected members are participants of a blockchain network. Some of the major uses of private blockchain are:
+
+*   **Deployed for voting**
+*   **Supply chain management**
+*   **Digital identity**
+*   **Asset ownership**
+
+Examples: Hyperledger Fabric, Enterprise Ethereum, Corda, Ripple (XRP) and Quorum
+
+**3\. Hybrid blockchain**
+
+A hybrid blockchain is a combination of the private and public blockchain. It uses the features of the two types of blockchains, that is, one can have a private permission-based system as well as a public permission-less system.
+
+Since a public or private blockchain cannot solve every problem out there. For organizations and companies that want to take advantage of the blockchain but don’t want to expose their critical business data and processes to the whole world. Below are some of the use cases for hybrid blockchain:
+
+*   **Hybrid IoT**
+*   **Global Finance and Trade**
+*   **Banking**
+*   **Supply Chain**
+*   **Governments**
+*   **Enterprise Services**
+
+For example, enterprises can use hybrid blockchain to automate their service and improve their reliability, trust, and transparency for both employees and the end-users — industries such as Aviation, Supply-Chain
+
+**4\. Consortium blockchain**
+
+A consortium blockchain is a semi-decentralized type where more than one organization manages a blockchain network.
+
+Consortium blockchains are typically used by **_banks and government organizations._**
+
+Now that we have identified and defined the significant categories of blockchain, we can now dive deeper into the technical differences between the 4 types of blockchains.
+
+The blockchain environment is changing dynamically and rapidly, these publicly shared ledgers need an efficient, reliable and **secure mechanism** to ensure all the transactions occurring on the network are valid and tamper-proof.
+
+The security mechanism is called the **consensus mechanism.**
+
+No, all blockchains are not the same. Each blockchain has its own unique features and characteristics.
+
+**What are the unique features of the different blockchain types?**
+
+Bitcoin is the first and most well-known blockchain, which uses a proof-of-work consensus mechanism.
+
+Ethereum is a blockchain that supports smart contracts. Other features and characteristics will vary depending on the blockchain.
+
+**What are some of the characteristics of Bitcoin Blockchain?**
+
+The Bitcoin blockchain is a decentralized, public ledger that records all Bitcoin transactions. It is also pseudonymous, meaning that addresses on the blockchain are not linked to real-world identities. Bitcoin is also censorship-resistant, meaning that it is not possible for third parties to prevent transactions from being processed on the blockchain.
+
+**1\. Decentralized**
+
+**2\. Public ledger**
+
+**3\. Records all Bitcoin transactions**
+
+**4\. Pseudonymous**
+
+**5\. Censorship-resistant**
+
+**What are some of the characteristics of Ethereum Blockchain?**
+
+The Ethereum blockchain is a decentralized platform that supports smart contracts. It is also Turing-complete, meaning that it can run any type of computation. Below are some of its characteristics.
+
+1\. Decentralized
+
+2\. Supports smart contracts
+
+3\. Turing-complete
+
+4\. Can run any type of computation
+
+5\. Flexible scripting language
+
+6\. EVM execution environment
+
+7\. Can create new tokens
+
+8\. Decentralized applications
+
+9\. Initial coin offerings
+
+10\. Decentralized autonomous organizations
+
+**What are some of the characteristics of Celo Blockchain?**
+
+The Celo blockchain is a decentralized platform that supports smart contracts. It is also scalable, meaning that it can handle a large number of transactions per second. Celo also has a built-in governance model, which allows for community involvement in the decision-making process. It is;
+
+1\. Decentralized
+
+2\. Supports smart contracts
+
+3\. Scalable
+
+4\. Built-in governance model
+
+5\. Community involvement
+
+6\. Open source
+
+7\. Cross-chain compatibility
+
+8\. Compatible with Ethereum Virtual Machine
+
+9\. Solidity programming language
+
+10\. Decentralized applications
+
+11\. Initial coin offerings
+
+12\. Decentralized autonomous organizations
+
+13\. Decentralized exchanges
+
+14\. Atomic swaps
+
+15\. Lightning Network
+
+16\. Cross-chain bridges
+
+**What consensus mechanism is used in Celo?**
+
+The Celo blockchain uses a proof-of-stake consensus mechanism. This means that instead of miners being rewarded for verifying transactions, they are instead chosen based on the amount of Celo tokens that they have staked.
+
+**What is the difference between a public and private blockchain?**
+
+A public blockchain is a blockchain that anyone can access and participate in. A private blockchain is a blockchain that is permissioned, meaning that only certain individuals or organizations can access and participate in it.
+
+**Common Terms Used in different Blockchains**
+
+**A smart contract** is a computer protocol that can be used to facilitate, verify, or enforce the negotiation or performance of a contract. Smart contracts can be used to automate a wide variety of processes, including financial transactions, supply chain management, voting, and other types of agreements.
+
+**A blockchain application** is a software application that runs on a blockchain platform. Blockchain applications can be used for a wide variety of purposes, including financial transactions, supply chain management, voting, and other types of agreements.
+
+**Conclusion**
+
+There are many different types of blockchains, each with its own unique features and characteristics. While all blockchains share some common features, such as being decentralized and using cryptography, they vary in other ways, such as in their consensus mechanisms and scalability.
+
+Before choosing a blockchain platform, it is important to understand the different types of blockchains and how they differ in order to choose the one that is best suited for your needs.

@@ -1,0 +1,114 @@
+---
+title: Deploying Your First Smart Contract On Lisk With Hardhat A Step By Step Guide
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Deploying Your First Smart Contra...
+date: '2024-03-29'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Deploying Your First Smart Contract on Lisk with Hardhat: A Step-by-Step Guide
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://jordanmuthemba.medium.com/?source=post_page---byline--66db52746915--------------------------------)[![CoinsBench](https://miro.medium.com/v2/resize:fill:48:48/1*cxyieQYifV8lgCQjIXZ6ZQ.jpeg)](https://coinsbench.com/?source=post_page---byline--66db52746915--------------------------------)
+
+[Jordan Type](https://jordanmuthemba.medium.com/?source=post_page---byline--66db52746915--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fcoinsbench.com%2Fdeploying-your-first-smart-contract-on-lisk-with-hardhat-a-step-by-step-guide-66db52746915&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--66db52746915---------------------post_header-----------)
+
+Published in[CoinsBench](https://coinsbench.com/?source=post_page---byline--66db52746915--------------------------------)·3 min read·Mar 29, 2024
+
+## **Introduction**
+
+Welcome to the exciting world of Lisk, where deploying a smart contract is made simple with the power of Hardhat. In this comprehensive guide, we’ll walk you through the process of deploying your first smart contract on the Lisk blockchain, specifically targeting the Sepolia testnet. Whether you’re a seasoned developer or new to blockchain technology, this article will equip you with the knowledge to take your first steps in the Lisk ecosystem.
+
+**Setting Up Your Environment**
+
+Before we dive into the deployment process, ensure you have Node.js and npm installed on your computer. Then, follow these steps to set up your Hardhat project:
+
+1.  **_Initialize Your Project_**  
+    — Open your terminal and run the following command to create a new directory for your project:
+
+```js 
+ mkdir my-lisk-project && cd my-lisk-project  
+```
+
+— Initialize a new npm project:
+
+```js
+ npm init -y  
+```
+
+— Install Hardhat and other necessary dependencies:
+
+```js
+ npm install - save-dev hardhat @nomicfoundation/hardhat-toolbox dotenv  
+```
+
+**_2\. Configure Hardhat_**  
+— Create a \`hardhat.config.ts\` file in the root directory of your project, and populate it with the provided configuration details. This configuration specifies the Solidity compiler version and the Lisk Sepolia testnet settings.
+
+**_3\. Environment Variables_**  
+— Create a \`.env\` file in the root directory to securely store your wallet’s private key. Do not share or commit this file to version control.
+
+```js  
+ WALLET_PRIVATE_KEY=your_wallet_private_key_here  
+```
+
+**Developing Your Smart Contract**
+
+**1\. _Write Your Contract_**  
+— Create a \`contracts\` directory, and within it, create a Solidity file (e.g., \`MyContract.sol\`). Write your smart contract code in this file.
+
+**_2\. Compile Your Contract_**  
+— Compile your smart contract by running:
+
+```js
+ npx hardhat compile  
+```
+
+— Placeholder for a screenshot of the compile command output.
+
+**Deploying Your Smart Contract**
+
+**_1\. Write a Deployment Script_**  
+— Create a directory named \`ignition/modules\` and write a TypeScript deployment script (e.g., \`Lock.ts\`) that specifies how to deploy your contract.
+
+**_2\. Deploy to Lisk Sepolia_**  
+— Use the Hardhat Ignition module to deploy your contract to the Lisk Sepolia testnet:
+
+```js 
+ npx hardhat ignition deploy ./ignition/modules/.ts  
+```
+
+— Placeholder for a screenshot of the deployment command output.
+
+**Verifying Your Deployment**
+
+After deployment, you can verify your smart contract on the Sepolia Blockscout Explorer. Use the transaction hash provided in the output to find your contract. For instance, visit the following URL to see an example deployment:  
+\- Sepolia Blockscout Transaction Example:
+
+(https://sepolia-blockscout.lisk.com/tx/0xd3bc9541693931824f87a84d2445fb8e1a7643e77925738a873a1c49a29264d3)
+
+**Conclusion**
+
+Congratulations! You’ve successfully deployed your first smart contract on the Lisk blockchain using Hardhat. The process, from setting up your environment to verifying your deployment, showcases the simplicity and power of the Lisk ecosystem. Explore further by visiting the \[Lisk Documentation\]([https://documentation.lisk.com/building-on-lisk/deploying-smart-contract/with-Hardhat](https://documentation.lisk.com/building-on-lisk/deploying-smart-contract/with-Hardhat)), the \[Lisk Sepolia Bridge\]([https://sepolia-bridge.lisk.com/bridge/lisk-sepolia-testnet](https://sepolia-bridge.lisk.com/bridge/lisk-sepolia-testnet)), the \[Lisk Portal\]([https://portal.lisk.com/](https://portal.lisk.com/)), and the \[Lisk Testnet\]([https://testnet.lisk.com/](https://testnet.lisk.com/)) for more resources and opportunities to build on Lisk.
+
+**Resources**
+
+\- \[Lisk Documentation on Deploying Smart Contracts with Hardhat\]([https://documentation.lisk.com/building-on-lisk/deploying-smart-contract/with-Hardhat](https://documentation.lisk.com/building-on-lisk/deploying-smart-contract/with-Hardhat))  
+\- \[Lisk Sepolia Bridge\]([https://sepolia-bridge.lisk.com/bridge/lisk-sepolia-testnet](https://sepolia-bridge.lisk.com/bridge/lisk-sepolia-testnet))  
+\- \[Lisk Portal\]([https://portal.lisk.com/](https://portal.lisk.com/))  
+\- \[Lisk Testnet\]([https://testnet.lisk.com/](https://testnet.lisk.com/))
+
+Remember, this guide focuses on deploying to the Sepolia testnet. When you’re ready to deploy to the mainnet, ensure you adjust your \`hardhat.config.ts\` with the mainnet configurations and use adequate safety measures for managing your private keys and resources. Happy building on Lisk!

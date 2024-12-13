@@ -1,0 +1,146 @@
+---
+title: A Step By Step Guide To Transferring Circles Usdc Tokens On Celo S Alfajores Testnet
+description: A guide to common code snippets for interacting with Ethereum smart contracts using A Step By Step Guide To Transferr...
+date: '2024-02-23'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## A Step-by-Step Guide to Transferring Circle’s USDC Tokens on Celo’s Alfajores Testnet
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/?source=post_page---byline--8098e8f8f54c--------------------------------)
+
+[Jordan Type](https://medium.com/?source=post_page---byline--8098e8f8f54c--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fjordanmuthemba.medium.com%2Fa-step-by-step-guide-to-transferring-circles-usdc-tokens-on-celo-s-alfajores-testnet-8098e8f8f54c&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--8098e8f8f54c---------------------post_header-----------)
+
+3 min read·Feb 23, 2024
+
+In this comprehensive guide, we explore the process of transferring Circle’s USDC tokens on the Celo Alfajores testnet. Aimed at developers and blockchain enthusiasts, this article provides a detailed walkthrough of executing token transfers using the ethers.js library. Whether you’re embarking on your blockchain journey or looking to refine your development skills, this guide serves as a practical resource for engaging with blockchain technologies.
+
+### Introduction to Celo Alfajores Testnet
+
+The Celo Alfajores testnet is a dynamic environment designed for developers to test and build applications on the Celo platform without incurring the costs of the main network. It offers a sandbox for deploying contracts, executing transactions, and experimenting with the Celo blockchain’s capabilities.
+
+### Prerequisites
+
+\- Node.js installed on your system  
+\- Access to a code editor  
+\- ethers.js library installed in your project (Install via \`npm install ethers\` if not already done)
+
+### Step 1: Setting Up Your Environment
+
+Begin by importing the ethers.js library to your project:
+
+```
+  
+const ethers = require('ethers');  
+
+```
+
+Define the RPC URL for connecting to the Celo Alfajores testnet:
+
+```
+  
+const rpcUrl = 'https://alfajores-forno.celo-testnet.org';  
+
+```
+
+Step 2: Connecting to the Network
+
+Create a provider to facilitate the connection to the Celo testnet:
+
+```
+const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+```
+
+Step 3: Setting Up the USDC Token Contract
+
+Identify and set up the USDC token contract address and ABI for interactions:
+
+```
+const usdcTokenAddress = '0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B';  
+const minTokenAbi = \[…\];
+```
+
+### Step 4: Preparing for the Transfer
+
+Specify the sender and receiver addresses and the sender’s private key. Use placeholders for actual values to maintain security:
+
+```
+const fromAddress = 'YOUR\_FROM\_ADDRESS';  
+const toAddress = 'YOUR\_TO\_ADDRESS';  
+const privatekey = 'YOUR\_PRIVATE\_KEY';  
+const amount = 1; // Number of USDC tokens to transfer
+```
+
+Initialize the wallet and contract instances using the provided details:
+
+```
+const wallet = new ethers.Wallet(privatekey, provider);  
+const contract = new ethers.Contract(usdcTokenAddress, minTokenAbi, wallet);
+```
+
+### Step 5: Executing the Transfer
+
+1\. Calculate the Transaction Amount: Convert the USDC amount to the smallest unit using the contract’s \`decimals\` which is 6 property:
+
+```
+const decimals = await contract.decimals();  
+const amountParsed = ethers.utils.parseUnits(amount.toString(), decimals);
+```
+
+2\. Check Sender’s Balance: Ensure the sender has sufficient USDC for the transfer:
+
+```
+const balance = await contract.balanceOf(fromAddress);  
+ console.log("Balance of Sender Before Transfer: ", ethers.utils.formatUnits(balance.toString(), decimals));  
+ if (balance.lt(amountParsed)) {  
+ throw new Error('Insufficient balance');  
+ }
+```
+
+3\. Initiate the Transfer: Call the \`transfer\` method with the recipient’s address and the amount:
+
+```
+let tx = await contract.transfer(toAddress, amountParsed);
+```
+
+4\. Confirm the Transaction: Wait for the transaction to be mined and retrieve the receipt:
+
+```
+let receipt = await tx.wait();  
+let url = \`https://alfajores.celoscan.io/tx/${receipt.transactionHash}\`;  
+ console.log(\`Transaction ${receipt.transactionHash} confirmed, check it out at ${url}\`);
+```
+
+5\. Verify Balances: Confirm the transfer by checking both sender’s and receiver’s balances post-transaction:
+
+```
+// Sender's balance after transfer  
+ const balanceAfter = await contract.balanceOf(fromAddress);  
+ console.log("Balance of Sender After Transfer: ", ethers.utils.formatUnits(balanceAfter.toString(), decimals));  
+// Receiver's balance after transfer  
+ const balanceAfterReceiver = await contract.balanceOf(toAddress);  
+ console.log("Balance of Receiver After Transfer: ", ethers.utils.formatUnits(balanceAfterReceiver.toString(), decimals));
+```
+
+You can check the source code of this guide on this link [Transfer-Circle-USDC-On-Celo-Testnet](https://github.com/Jordan-type/Transfer-Circle-USDC-On-Celo-Testnet), also will be updating it with more guide on Circle USDC on Celo
+
+### Conclusion
+
+This guide has demonstrated how to transfer USDC tokens on the Celo Alfajores testnet using ethers.js. Through this practical example, you’ve learned to interact with blockchain networks, execute token transfers, and utilize essential tools for blockchain development.
+
+Blockchain technology offers a vast landscape for innovation and development. By building on the skills acquired in this guide, you can further explore smart contract deployment, token creation, and DApp development on the Celo platform. The path to blockchain mastery is through continuous learning and experimentation — embrace the journey and the opportunities it presents

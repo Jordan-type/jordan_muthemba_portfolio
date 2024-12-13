@@ -1,0 +1,145 @@
+---
+title: The Distinctions Between Ethers Js And Web3 Js
+description: A guide to common code snippets for interacting with Ethereum smart contracts using The Distinctions Between Ethers J...
+date: '2022-12-02'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## **The Distinctions between Ethers.js and Web3.js**
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)
+
+](https://medium.com/@jordanmuthemba?source=post_page---byline--8e51f60083ce--------------------------------)[![Coinmonks](https://miro.medium.com/v2/resize:fill:48:48/1*-_aiJHzJPz655N7iSSrLrQ.png)
+
+](https://medium.com/coinmonks?source=post_page---byline--8e51f60083ce--------------------------------)
+
+[Jordan Type](https://medium.com/@jordanmuthemba?source=post_page---byline--8e51f60083ce--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fmedium.com%2Fcoinmonks%2Fthe-distinctions-between-ethers-js-and-web3-js-8e51f60083ce&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--8e51f60083ce---------------------post_header-----------)
+
+Published in[Coinmonks](https://medium.com/coinmonks?source=post_page---byline--8e51f60083ce--------------------------------)·4 min read·Dec 2, 2022
+
+**Introduction**
+
+You have probably come across ethers.js, more so web3.js as a frontend blockchain developer or still as a backend smart contract developer while testing your smart contract. I believe these two libraries are the most important node packages that offer different ways of interacting with your smart contract and processing transaction in an EVM-compatible blockchain.
+
+In this article, I will cover the differences between the two and how they interact with the network.
+
+**Prerequisites**
+
+To get more out of this article you will need to have:
+
+1.  Knowledge of JavaScript, and Node.js
+2.  Basic understanding of smart contracts, web3 and blockchain technology
+
+**What is a library?**
+
+A library is a packed, reusable section of code that executes a single function or a group of closely related functions, to put it simply. So rather than writing the code from scratch, you may add a library to your program and access it whenever you need to implement that function.
+
+Suppose that instead of an application, you are building a house. One of the things you’ll need for that house is a stove, but building one from scratch when you could just buy one off the shelf won’t be particularly practical. What a library is to a program, a stove is to a home. There are some libraries and tools that you are already familiar with.
+
+**What is Ethers?**
+
+Ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem. It was originally designed for use with [ethers.io](https://ethers.io/) and has since expanded into a more general-purpose library.
+
+**Features of Ethers.js**
+
+1.  Keep your private keys in your client, safe and sound
+2.  Import and export JSON wallets (Geth, Parity and crowdsale)
+3.  Import and export BIP 39 mnemonic phrases (12 word backup phrases) and HD Wallets (English, Italian, Japanese, Korean, Simplified Chinese, Traditional Chinese; more coming soon).
+4.  Meta-classes create JavaScript objects from any contract ABI, including ABIv2 and Human-Readable ABI.
+5.  Connect to Ethereum nodes over [JSON-RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC), [INFURA](https://infura.io/), [Etherscan](https://etherscan.io/), [Alchemy](https://alchemyapi.io/), [Cloudflare](https://developers.cloudflare.com/distributed-web/ethereum-gateway/) or [MetaMask](https://metamask.io/).
+6.  ENS names are first-class citizens; they can be used anywhere an Ethereum addresses can be used.
+7.  Tiny (~88kb compressed; 284kb uncompressed).
+8.  Complete functionality for all your Ethereum needs
+9.  Extensive [documentation](https://docs.ethers.io/).
+10.  Large collection of test cases which are maintained and added to.
+11.  Fully TypeScript ready, with definition files and full TypeScript source.
+12.  MIT License (including _ALL_ dependencies); completely open source to do with as you please
+
+**What is Web3.js?**
+
+Web3.js is a collection of libraries that allow developers to interact with a remote or local Ethereum node using HTTP, IPC, or WebSocket.
+
+You can create websites or clients that communicate with the blockchain using this library. This can include, among other things, transmitting ether from one user to another, examining data from smart contracts, and designing smart contracts.
+
+## Distinctions between Ethers.js and Web3.js
+
+Unlike web3.js, which provides a single instantiated web3 object with methods for interacting with the blockchain, ethers.js divides the API into two distinct roles. The provider is an anonymous connection to the Ethereum network, while the signer has access to the private key and can sign transactions. The ethers team intended for this separation of concerns to give developers more flexibility.
+
+**Comparisons with examples**
+
+The following are some common functions that a developer might include in their dapp. You’ll notice that they provide the same functionality, with minor API differences.
+
+**Creating a provider with MetaMask wallet**
+
+**web3**
+
+_const web3 = new Web3(Web3.givenProvider);_
+
+**ethers**
+
+_const provider = new ethers.providers.Web3Provider(window.ethereum)_
+
+**Obtaining the account balance**
+
+**web3**
+
+_const balance = await web3.eth.getBalance(“0x0”)_
+
+**ethers (supports ENS!)**
+
+_const balance = await provider.getBalance(“ethers.eth”)_
+
+### Instantiating contract
+
+**web3**
+
+_const myContract = new web3.eth.Contract(ABI, contractAddress);_
+
+**ethers**
+
+_const myContract = new ethers.Contract(contractAddress, ABI, provider.getSigner());_
+
+### Calling contract method
+
+**web3**
+
+_const balance = await myContract.methods.balanceOf(“0x0”).call()_
+
+**ethers**
+
+_const balance = await myContract.balanceOf(“ethers.eth”)_
+
+**Conclusion**
+
+In this read we have learned:
+
+1\. what is a web3.js and ethers.js library
+
+2\. How both are used to intaract with the smart contract
+
+3\. And how they are distict form each other
+
+**Links**
+
+Docs: [https://docs.ethers.io/v5/getting-started/](https://docs.ethers.io/v5/getting-started/)
+
+Docs: [https://github.com/web3/web3.js/tree/v1.8.1](https://github.com/web3/web3.js/tree/v1.8.1)
+
+Youtube:[https://www.youtube.com/watch?v=yk7nVp5HTCk](https://www.youtube.com/watch?v=yk7nVp5HTCk)
+
+> New to trading? Try [crypto trading bots](https://medium.com/coinmonks/crypto-trading-bot-c2ffce8acb2a) or [copy trading](https://medium.com/coinmonks/top-10-crypto-copy-trading-platforms-for-beginners-d0c37c7d698c)

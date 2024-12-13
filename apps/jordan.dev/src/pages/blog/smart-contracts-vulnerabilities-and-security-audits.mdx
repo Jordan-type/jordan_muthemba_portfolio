@@ -1,0 +1,111 @@
+---
+title: Smart Contracts Vulnerabilities And Security Audits
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Smart Contracts Vulnerabilities A...
+date: '2022-06-14'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## **Smart Contracts Vulnerabilities and Security Audits**
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/@jordanmuthemba?source=post_page---byline--8b37874b9981--------------------------------)[![Coinmonks](https://miro.medium.com/v2/resize:fill:48:48/1*-_aiJHzJPz655N7iSSrLrQ.png)](https://medium.com/coinmonks?source=post_page---byline--8b37874b9981--------------------------------)
+
+[Jordan Type](https://medium.com/@jordanmuthemba?source=post_page---byline--8b37874b9981--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fmedium.com%2Fcoinmonks%2Fsmart-contracts-vulnerabilities-and-security-audits-8b37874b9981&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--8b37874b9981---------------------post_header-----------)
+
+Published in[Coinmonks](https://medium.com/coinmonks?source=post_page---byline--8b37874b9981--------------------------------)·4 min read·Jun 14, 2022
+
+**What is smart contract Vulnerability?**
+
+A smart contract vulnerability is a flaw in the contract code that can be exploited to cause unexpected or undesired results. These vulnerabilities can be found in both the contract code itself and in the contracts that interact with it. While some vulnerabilities are relatively harmless, others can be used to completely undermine the security of a contract and allow attackers to gain control of it.
+
+In this article, I will explain some of the most common smart contract vulnerabilities, ways to prevent them, tools, third-party services and companies that can help in auditing and making sure your smart contracts are secure and safe for use
+
+**Vulnerabilities in smart contracts?**
+
+One type of vulnerability that has been exploited in the past is the “**re-entrancy**” vulnerability. This is where a malicious actor is able to call a function in a smart contract multiple times before the contract has a chance to update its internal state. This can allow the attacker to siphon off funds from the contract, or cause the contract to malfunction.
+
+Another type of vulnerability is the “**unchecked-send**” vulnerability. This is where a contract fails to check the destination address of a transaction before sending funds. This can allow attackers to send funds to themselves, or to an address that they control.
+
+Finally, the “**integer-overflow**” and “**integer-underflow**” vulnerabilities can allow attackers to send very large or minimal amounts of cryptocurrency to a smart contract, which can cause the contract to malfunction.
+
+These are just a few of the many vulnerabilities in smart contracts. It is important to carefully review any smart contract code before using it and to use a reputable third-party service to audit the code.
+
+**Smart Contract Audit**
+
+A smart contract audit provides a detailed analysis of a project’s smart contracts. This is important to safeguard funds invested through them. As all transactions on the blockchain are final funds cannot be retrieved should they be stolen.
+
+These contracts are normally written in Solidity programming language and provided via **GitHub**. Security audits are particularly valuable for **DAO** and **DeFi** projects that expect to handle blockchain transactions worth millions of dollars or a huge amount of users.
+
+Personally, smart contract audits are essential when investing in new projects. It’s a standard that I look for in projects that want to be taken seriously. These audits are also made public to investors and developers.
+
+**Companies that do smart contract auditing?**
+
+There are a number of companies that provide smart contract auditing services with the most popular ones being **CertiK** and **ConsenSys** others include:
+
+\- **New Alchemy**: A blockchain consulting and development firm that offers smart contract auditing services
+
+\- **Quantstamp**: A security-focused blockchain firm that offers smart contract auditing services
+
+\- **Solidified**: A smart contract auditing platform that crowd sources audit from a community of expert auditors
+
+\- **Hosho**: A security firm that specializes in blockchain security, including smart contract auditing
+
+\- **Chainsecurity**: A blockchain security firm that offers smart contract auditing services
+
+S**ecure smart contract frameworks?**
+
+There are a number of secure smart contract frameworks that can be used to develop smart contracts, including:
+
+\- **Truffle**: A development framework for Ethereum that includes a built-in smart contract linter
+
+\- **OpenZeppelin**: A framework of reusable smart contracts for Ethereum
+
+\- **Secure Smart Contract**: A framework for developing secure smart contracts
+
+\- **MythX**: A security analysis tool for Ethereum smart contracts
+
+**Tools used to Audit smart contracts?**
+
+There are a number of tools that can be used to audit smart contracts, including:
+
+\- **Mythril**: A security analysis tool for Ethereum smart contracts
+
+\- **Solium**: A linter for Solidity, the programming language used for Ethereum smart contracts
+
+\- **Oyente**: A smart contract analyzer
+
+\- **Securify**: A tool for security analysis of Ethereum smart contracts
+
+**Third-party services for smart contract audit?**
+
+There are a number of reputable third-party services that can audit the code of a smart contract. These services will review the code for vulnerabilities and errors and provide a report that can be used to make sure that the contract is safe to use. Some of the more popular smart contract audit services include:
+
+**\- MythX**
+
+**\- Quantstamp**
+
+**\- Solidified**
+
+**\- Securify**
+
+**\- SmartCheck**
+
+**Conclusion**
+
+Smart contract audits have become essential when investing in new projects. It’s now a standard that you have to look for in every project that you invest in and wants to be taken seriously.
+
+Whether you are a techie or not it’s important to read this audit report to be able to understand the severity of the potential issue.

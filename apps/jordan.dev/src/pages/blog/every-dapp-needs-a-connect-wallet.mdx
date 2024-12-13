@@ -1,0 +1,109 @@
+---
+title: Every Dapp Needs A Connect Wallet
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Every Dapp Needs A Connect Wallet.
+date: '2023-04-7'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+wallet connect social image
+
+## Every Dapp needs a “Connect Wallet”
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/?source=post_page---byline--fc31abc8ae44--------------------------------)
+
+[Jordan Type](https://medium.com/?source=post_page---byline--fc31abc8ae44--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fjordanmuthemba.medium.com%2Fevery-dapp-needs-a-connect-wallet-fc31abc8ae44&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--fc31abc8ae44---------------------post_header-----------)
+
+3 min read·Apr 7, 2023
+
+**Introduction**
+
+Decentralized applications (Dapps) have become more popular in the blockchain space since the introduction of smart contract development. Dapps have unique features that offer users a more secure, transparent, and decentralized experience than centralized applications.
+
+One crucial aspect of using dApps is having a wallet. This article will explore why every dApp requires a wallet connection and the different types of wallets that can be used with dApps.
+
+**What is a decentralized application (Dapp)?**
+
+A **decentralized application** (dapp) is an application built on a decentralized network that combines a smart contract and a front-end user interface. Smart contracts are accessible and transparent — like open APIs — so your dapp can even include a smart contract that someone else has written.
+
+For users to interact with your application in Web2, they need to create an account using an email address or connect with various social media applications like login with g-mail, Twitter or Facebook.
+
+Same case for Dapps users who need to have wallet addresses. They can create a wallet using the different wallet providers available (MetaMask, Trust Wallet, Valora, etc.) to be able to interact with your dapp.
+
+## What is wallet connect?
+
+[**WalletConnect**](https://github.com/WalletConnect) is an open-source protocol for connecting decentralized applications to mobile wallets with QR code scanning or deep linking.
+
+## How does Wallet Connect work?
+
+**Wallet Connect** is a simple infrastructure that can be set up by any developer. Using a bridge server to relay the messages without having access to any of their contents.
+
+The contents are encrypted using the session data shared by the QR code between desktop and mobile. There are libraries for Web, iOS and Android. Check Github for more details: [https://github.com/WalletConnect](https://github.com/WalletConnect)
+
+**List of Wallets Supported by Wallet Connect**
+
+Desktop Wallet
+
+ledger
+
+Tokenary
+
+Infinity Wallet
+
+Wallet 3
+
+SecuX
+
+Ambire
+
+PunkWallet
+
+RiceWallet
+
+**What is React Celo?**
+
+React Celo is a React hook for managing access to Celo with a built-in headless modal system for connecting to your user’s wallet of choice. Your Dapp is made available to everyone in the Celo ecosystem, from Valora users to Ledger users.
+
+By default, the React Celo is styled so that you can drop it into your application. You can still customize it according to your UX to maintain consistency in your application.
+
+Check GitHub for more details: [https://github.com/celo-org/react-celo](https://github.com/celo-org/react-celo)
+
+**List of Wallets Supported byreact-celo ( previous use-contract kit)**
+
+Celo Dance
+
+Celo Extension Wallet(MetaMask fork)
+
+Celo Terminal
+
+Celo Wallet
+
+Ledger
+
+MetaMask
+
+Plaintext private key
+
+Omni
+
+Valora
+
+Wallet Connect
+
+**Conclusion**
+
+In conclusion, a wallet is necessary for using and accessing every dApp because it is the primary method of communication. Depending on their unique requirements and preferences, users can select from a variety of wallet models, including hardware, software, and mobile wallets. No of the wallet type, it’s crucial to make sure the private keys are safe because they give access to the user’s funds and assets on the blockchain.

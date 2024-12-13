@@ -1,0 +1,158 @@
+---
+title: Clean Code In Solidity Building A Smart Bookstore Contract With Style
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Clean Code In Solidity Building A...
+date: '2024-11-22'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Clean Code in Solidity: Building a Smart BookStore Contract with Style 🤖📚
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://jordanmuthemba.medium.com/?source=post_page---byline--967077f491dd--------------------------------)[![CoinsBench](https://miro.medium.com/v2/resize:fill:48:48/1*cxyieQYifV8lgCQjIXZ6ZQ.jpeg)](https://coinsbench.com/?source=post_page---byline--967077f491dd--------------------------------)
+
+[Jordan Type](https://jordanmuthemba.medium.com/?source=post_page---byline--967077f491dd--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fcoinsbench.com%2Fclean-code-in-solidity-building-a-smart-bookstore-contract-with-style-967077f491dd&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--967077f491dd---------------------post_header-----------)
+
+Published in[CoinsBench](https://coinsbench.com/?source=post_page---byline--967077f491dd--------------------------------)·4 min read·Nov 22, 2024
+
+Writing smart contracts in Solidity requires careful attention to detail, not just for functionality, but also for maintainability, readability, and security. Today, let’s walk through some clean code principles using the **BookStore** and **AdvancedBookStore** smart contracts to create a well-structured, maintainable blockchain bookstore. 📕🛍️
+
+### 1\. Using `struct` to Keep Your Code Organized 📁
+
+The **Book** struct serves as a perfect example of grouping related properties together. Instead of having separate variables for each property of a book (like `title`, `author`, `price`, etc.), you can group them in a `struct`:
+
+```js
+struct Book {  
+    string title;  
+    string author;  
+    uint price;  
+    uint256 stock;  
+    bool isAvailable;  
+}
+```
+
+This keeps your data organized and makes your code more readable. When interacting with books, everything is in one place, making it easier for other developers to understand your contract. 🌍
+
+### 2\. Reuse Code with `Modifiers` 🔁
+
+Modifiers like `onlyOwner` are great for **reusability**. Instead of adding `require(msg.sender == owner)` checks throughout your functions, you create a modifier and use it wherever needed. This makes your code more concise and reduces repetition:
+
+```js
+modifier onlyOwner() {  
+    require(msg.sender == owner, "Only the owner can perform this action.");  
+    \_;  
+}
+```
+
+Using OpenZeppelin’s `Ownable` contract adds even more clean code advantages by providing reliable ownership management functions.
+
+### 3\. Emit Events to Keep Track of State 🌐
+
+Events provide an excellent way to track changes and updates in the blockchain. Think of events as an **audit trail** or log messages to keep the system transparent and debuggable.
+
+In our contracts, we use events like `BookAdded`, `PurchaseInitiated`, `PurchaseConfirmed`, and `BookRemoved` to keep track of actions:
+
+```sol
+event BookAdded(uint256 indexed bookId, string title, string author, uint256 price, uint256 stock);  
+event PurchaseInitiated(uint256 indexed bookId, address indexed buyer, address indexed seller, uint256 quantity);
+```
+
+Adding `indexed` to event parameters helps make searches and filters more efficient when you're querying past events in dApps. 🍎🎡
+
+### 4\. Functions: Keep Them Short and to the Point 💡
+
+*   **Single Responsibility**: Functions should be concise and have a single, clear responsibility. For example, the `addBook` function focuses only on adding a book, and `buyBook` only handles purchasing.
+*   **Descriptive Names**: Function names like `addBook`, `getBooks`, `buyBook`, and `markAsBestseller` are simple, intuitive, and clearly convey the purpose of each function. Avoid cryptic names or abbreviations.
+
+### 5\. Manage State Changes Carefully 🚀
+
+When managing state changes, **always use** `**require**` **statements** for validation to ensure safe and proper conditions. For example, we prevent buying a book that is out of stock:
+
+```js
+require(book.isAvailable, "This book is not available.");  
+require(book.stock >= \_quantity, "Not enough stock available.");  
+require(msg.value == totalPrice, "Incorrect payment amount.");
+```
+
+Each `require` statement not only acts as a guardrail to prevent invalid operations but also adds helpful error messages to ease debugging. Always validate input and state before making modifications!
+
+### 6\. Inheritance for Better Structure 🔗
+
+The **AdvancedBookStore** contract inherits from **BookStore**, adding extended functionality, such as:
+
+*   Marking books as **bestsellers**.
+*   **Removing books** from the store.
+
+This separation keeps the original contract simple while allowing easy expansion for new features. Think of inheritance like building blocks — it keeps your core contract simple and allows for clean extensions. 🧳🧺
+
+```js
+contract AdvancedBookStore is BookStore {  
+    mapping(uint256 => bool) public bestsellers;  
+  
+    event BookMarkedAsBestseller(uint256 indexed bookId);  
+  
+    function markAsBestseller(uint256 \_bookId) public onlyOwner {  
+        require(books\[\_bookId\].price != 0, "Book does not exist.");  
+        bestsellers\[\_bookId\] = true;  
+        emit BookMarkedAsBestseller(\_bookId);  
+    }  
+}
+```
+
+This clean inheritance model makes it easy to maintain and enhance features over time.
+
+### 7\. Use of OpenZeppelin Contracts 🔒
+
+To prevent **reinventing the wheel** and to increase the security and reliability of your contracts, use widely-tested and trusted libraries like **OpenZeppelin**. In this case, importing `Ownable` from OpenZeppelin simplifies the ownership management, reducing the risks associated with implementing it manually.
+
+```js
+import "@openzeppelin/contracts/access/Ownable.sol";
+```
+
+### 8\. Advanced Events ⏰
+
+Consider adding **event-driven architecture** concepts to make your dApp more powerful. Events like `BookAdded`, `PurchaseInitiated`, and `PurchaseConfirmed` are great for real-time notifications or monitoring transaction flows.
+
+For instance, the **PurchaseIntiated** and **PurchaseConfirmed** events can be used to trigger notifications in your frontend, providing users with real-time updates on their purchases. This improves the user experience, making your dApp feel more responsive. 🛠️⚡
+
+### 9\. Proper Pricing Units and Conversions 💰
+
+*   Always use **consistent units**. Ether is the common currency for smart contracts, but remember to use `**wei**` for calculations since it's the smallest unit of Ether.
+*   In our example, the price of each book is converted to `wei` to ensure proper calculations:
+
+```js
+books\[\_bookId\] = Book({  
+    title: \_title,  
+    author: \_author,  
+    price: \_price \* 1 ether, // Proper conversion to make sure price is in wei  
+    stock: \_stock,  
+    isAvailable: \_stock > 0  
+});
+```
+
+This ensures no rounding issues occur and keeps your code gas-efficient.
+
+## Wrapping Up 👊🏼
+
+Following these clean code principles in Solidity not only makes your contracts easier to read and maintain but also ensures **security** and **gas efficiency** — key elements in blockchain development. 🔨🔧
+
+Remember, smart contracts are **immutable** once deployed, so making sure your code is clean, clear, and secure is crucial. With a structured approach, you can build scalable, readable, and safe smart contracts that everyone loves to work with. 🌟
+
+Happy coding, and may your smart contracts always be bug-free! 🚀✨
+
+**Next Steps**: I will be adding more examples, showing good and bad practices in Solidity in my next article. Stay tuned for those tips and make your smart contracts even more robust and clean! 🤖🌱🍻
+
+⭐ **Clean Code Friday** ⭐ 🎈 Let’s make coding in Solidity fun, clean, and easy to understand for all developers in the community! 🧱🌟
