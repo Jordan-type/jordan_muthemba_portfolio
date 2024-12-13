@@ -1,0 +1,137 @@
+---
+title: Fetching Cryptocurrency Prices With Uniswap V3 And Ethers Js V5
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Fetching Cryptocurrency Prices Wi...
+date: '2024-01-31'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Fetching Cryptocurrency Prices with Uniswap V3 and Ethers.js V5
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)
+
+](https://jordanmuthemba.medium.com/?source=post_page---byline--2fb0b3ddd33b--------------------------------)[![Block Magnates](https://miro.medium.com/v2/resize:fill:48:48/1*_DO7SflM7OJTc25NWdZoiA.png)
+
+](https://blog.blockmagnates.com/?source=post_page---byline--2fb0b3ddd33b--------------------------------)
+
+[Jordan Type](https://jordanmuthemba.medium.com/?source=post_page---byline--2fb0b3ddd33b--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fblog.blockmagnates.com%2Ffetching-cryptocurrency-prices-with-uniswap-v3-and-ethers-js-v5-2fb0b3ddd33b&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--2fb0b3ddd33b---------------------post_header-----------)
+
+Published in[
+
+Block Magnates
+
+](https://blog.blockmagnates.com/?source=post_page---byline--2fb0b3ddd33b--------------------------------)·2 min read·Jan 31, 2024
+
+In the ever-evolving world of cryptocurrencies, accessing real-time exchange rates can be a crucial requirement for various applications. This article delves into how one can utilize Uniswap V3 and Ethers.js V5, a prominent Ethereum library, to fetch the current exchange rate between two cryptocurrencies.
+
+## Setting Up the Environment
+
+To begin, ensure that Node.js is installed on your system. We will be using Ethers.js V5, a library that allows interaction with the Ethereum blockchain.
+
+Dependencies:
+
+\- \`ethers\`: A library for interacting with the Ethereum Blockchain and its ecosystem.
+
+\- \`@uniswap/v3-periphery\`: Provides ABI for interacting with Uniswap V3.
+
+Environment Variables:
+
+\- \`ETHEREUM\_MAINNET\_RPC\`: The RPC URL for Ethereum’s Mainnet.
+
+\- \`WALLET\_PRIVATE\_KEY\`: Your Ethereum wallet private key.
+
+## The Code Explained
+
+Importing Libraries and Setting Up
+
+Firstly, we import the necessary libraries and set up the environment.
+
+```javascript
+
+const { ethers } = require(“ethers”);
+
+const { abi: QuoterABI } = require(“@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json”);
+
+require(‘dotenv’).config();
+
+const provider = new ethers.providers.JsonRpcProvider(process.env.ETHEREUM\_MAINNET\_RPC);
+
+```
+
+## Establishing Contract and Provider
+
+We establish a connection to the Ethereum mainnet via the provider and set up the Uniswap V3 quoter contract.
+
+```javascript
+
+const quoterAddress = “0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6”;
+
+const signer = new ethers.Wallet(process.env.WALLET\_PRIVATE\_KEY, provider);
+
+const quoterContract = new ethers.Contract(quoterAddress, QuoterABI, provider);
+
+```
+
+Fetching Prices Function
+
+\`fetchPrice\` function takes in the addresses of the two tokens and the amount to be converted. It then interacts with the Uniswap V3 quoter contract to fetch the conversion rate.
+
+```javascript
+
+const fetchPrice = async (addressFrom, addressTo, humanValue) => {
+
+const amountIn = ethers.utils.parseUnits(humanValue.toString(), 18);
+
+const quotedAmountOut = await quoterContract.callStatic.quoteExactInputSingle(
+
+addressFrom, addressTo, 3000, amountIn, 0);
+
+return ethers.utils.formatUnits(quotedAmountOut.toString(), 18);
+
+};
+
+```
+
+## Main Function
+
+In the \`main\` function, we define the token addresses (here, WETH and DAI) and call \`fetchPrice\`.
+
+```javascript
+
+const main = async () => {
+
+const addressFrom = “0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2”; // WETH
+
+const addressTo = “0x6B175474E89094C44Da98b954EedeAC495271d0F”; // DAI
+
+const humanValue = “1”; // 1 ETH
+
+const result = await fetchPrice(addressFrom, addressTo, humanValue);
+
+console.log(\`The price of ${humanValue} ${addressFrom} in ${addressTo} is ${result}\`);
+
+};
+
+main();
+
+```
+
+## Conclusion
+
+This script provides a straightforward approach to obtaining the exchange rates between two cryptocurrencies using Uniswap V3 and Ethers.js. It’s a valuable tool for developers working on financial applications where real-time data is critical.
+
+Remember to handle your private keys securely and never expose them in your codebase. Happy coding!

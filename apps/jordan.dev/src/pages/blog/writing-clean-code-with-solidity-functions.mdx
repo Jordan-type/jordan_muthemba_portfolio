@@ -1,0 +1,128 @@
+---
+title: Writing Clean Code With Solidity Functions
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Writing Clean Code With Solidity ...
+date: '2024-11-15'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Writing Clean Code with Solidity Functions 🧹✨
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)
+
+](https://jordanmuthemba.medium.com/?source=post_page---byline--ee417266120f--------------------------------)[![CoinsBench](https://miro.medium.com/v2/resize:fill:48:48/1*cxyieQYifV8lgCQjIXZ6ZQ.jpeg)
+
+](https://coinsbench.com/?source=post_page---byline--ee417266120f--------------------------------)
+
+[Jordan Type](https://jordanmuthemba.medium.com/?source=post_page---byline--ee417266120f--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fcoinsbench.com%2Fwriting-clean-code-with-solidity-functions-ee417266120f&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--ee417266120f---------------------post_header-----------)
+
+Published in[CoinsBench](https://coinsbench.com/?source=post_page---byline--ee417266120f--------------------------------)·3 min read·Nov 15, 2024
+
+In Solidity, following a clean code approach for functions helps in creating readable, maintainable, and efficient smart contracts. Here, I’ll walk through some best practices using the example functions in the `Function` contract and suggest a clean coding approach for Solidity functions.
+
+Best Practices for Solidity Functions 🛠️
+
+1.  **Function Naming and Return Values 🏷️**:
+
+*   Choose clear, descriptive names for functions. For instance, `returnMany()` clearly conveys that multiple values are returned.
+*   Explicitly name return variables where possible, as it helps in readability and makes it easier to understand what each output represents. 🎯
+
+2\. **Single Responsibility Principle (SRP) 📜**:
+
+*   Each function should perform a specific task. For instance, `assigned()` calculates the sum of two numbers, keeping the functionality simple and clear. Avoid adding unrelated functionality to keep functions focused. 🔍
+
+3\. **Use of Named Returns 🖋️**:
+
+*   Named return variables (e.g., in `named()` and `assigned()`) are helpful, especially in functions that return multiple values. This approach eliminates the need to specify a `return` statement, making the code simpler and more readable. 📚
+*   Additionally, when the return variable names provide context, like `x`, `y`, and `z` for mathematical functions, it improves readability.
+
+```javascript
+function named() public pure returns (uint8 x, bool y, uint8 z) {  
+    x = 1;  
+    y = true;  
+    z = 1;  
+}
+```
+
+4\. **Omitting the** `**return**` **Keyword with Named Returns 🏌️**:
+
+*   When return values are named (as in `assigned()`), Solidity allows omitting the `return` statement. This feature can simplify code and make functions look cleaner. 🌟
+
+```javascript
+function assigned() public pure returns (uint8 x, uint8 y, uint8 z) {  
+    x = 1;  
+    y = 2;  
+    z = x + y;  // output = 3  
+}
+```
+
+**5\. Destructuring Assignments ✂️**:
+
+*   For functions that return multiple values, destructuring assignments allow direct assignment of each returned value to separate variables. This approach enhances code readability and makes the intent clear. 🎨
+
+```javascript
+function destructuringAssignments() public pure returns (uint8, bool, uint8) {  
+    (uint8 i, bool b, uint8 j) = returnMany();  
+    return (i, b, j);  
+}
+```
+
+6\. **Avoid Complex Data Types in Public Functions 🛡️**:
+
+*   Certain complex data types, like structs or arrays of structs, may not be accepted as inputs or outputs in public functions due to storage and gas limitations. Consider converting them into simpler types or using smaller structures when necessary. ⚙️
+
+7\. **Error Handling and Validations ⚠️**:
+
+*   Use `require` statements for input validation in functions that accept parameters, especially if the data is critical (e.g., checking array bounds in `getPen()`).
+
+```javascript
+function getPen(uint256 \_index) public view returns (string memory, PenType, uint256, bool) {  
+    require(\_index < pens.length, "Pen does not exist");  
+    Pen memory pen = pens\[\_index\];  
+    return (pen.brand, pen.penType, pen.stock, pen.isAvailable);  
+}
+```
+
+8\. **Array Inputs and Outputs 📦**:
+
+*   Arrays can be used as inputs or outputs in Solidity functions. For instance, `arrayInput()` accepts an array as an argument, and `arrayOutput()` returns an array. 🗂️
+*   Always use `memory` or `storage` keywords to specify the location of array parameters (e.g., `uint256[] memory _arr`).
+
+```javascript
+function arrayInput(uint256\[\] memory \_arr) public {}  
+function arrayOutput() public view returns (uint256\[\] memory) {  
+    return arr;  
+}
+```
+
+**9\. Gas Optimization ⛽**:
+
+*   Avoid unnecessary state-changing operations or repeated calculations in functions.
+*   Optimize storage usage by limiting the use of state variables and preferring `memory` over `storage` when possible. 🚀
+
+10\. **Documentation and Comments 📝**:
+
+*   Adding comments for complex logic or unusual design decisions can significantly improve code readability.
+*   Use Solidity’s NatSpec comments for function descriptions and parameter explanations, making the contract self-documenting and easier to understand for other developers. 📖
+
+## Final Note
+
+Following these clean code principles in Solidity makes your code more readable and maintainable and ensures gas efficiency and security, which are essential for production-level smart contracts. 🏗️💡
+
+In the **next article**, I’ll dive deeper by providing **good** and **bad examples** of Solidity functions to illustrate these principles in action. Stay tuned to see how small changes can lead to cleaner, more efficient, and professional smart contracts. 🚀✨
+
+Happy Clean Code Friday! 🧼🎉

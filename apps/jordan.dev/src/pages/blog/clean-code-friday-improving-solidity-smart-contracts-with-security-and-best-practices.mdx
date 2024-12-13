@@ -1,0 +1,206 @@
+---
+title: Clean Code Friday Improving Solidity Smart Contracts With Security And Best Practices
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Clean Code Friday Improving Solid...
+date: '2024-12-12'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Clean Code Friday: Improving Solidity Smart Contracts with Security and Best Practices 🚀🔒
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/?source=post_page---byline--60693c4089ff--------------------------------)
+
+[Jordan Type](https://medium.com/?source=post_page---byline--60693c4089ff--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fjordanmuthemba.medium.com%2Fclean-code-friday-improving-solidity-smart-contracts-with-security-and-best-practices-60693c4089ff&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--60693c4089ff---------------------post_header-----------)
+
+4 min read·5 days ago
+
+Hello developers! 👋 Welcome to this week’s Clean Code Friday. 💻 Today, we’re going to look at a Solidity smart contract example called **Jokes** 🤡. We’ll explore how this contract works, discuss ways to write cleaner code ✨, and most importantly, improve it by preventing common vulnerabilities 🔒.
+
+## Overview of the Contract
+
+The **Jokes** contract is a Solidity-based smart contract that allows users to create jokes 😂, reward them 💰, and withdraw earnings 💵. Here is a quick summary of the functions:
+
+*   **createJoke**: Allows users to create a new joke.
+*   **rewardJoke**: Allows anyone to reward a joke with a set reward amount.
+*   **withdrawBalance**: Let joke creators withdraw their earnings.
+*   **deleteJoke**: Allows a joke creator to delete their joke.
+
+Now, let’s discuss how to improve the quality of the code 🛠️ and address potential security vulnerabilities 🛡️.
+
+## Improving Clean Code and Security
+
+## 1\. Add Access Control for Sensitive Functions
+
+Currently, anyone can call the **initializeRewards** function ⚠️. It’s important to add access control to ensure that only authorized users can modify these values 🔐.
+
+**Improvement**:
+
+*   Introduce a modifier like `onlyOwner` to restrict who can call **initializeRewards** 🔒.
+
+```js
+address public owner;  
+  
+modifier onlyOwner() {  
+    require(msg.sender == owner, "Only the owner can call this function");  
+    \_;  
+}  
+  
+constructor() {  
+    owner = msg.sender;  
+}  
+  
+function initializeRewards() public onlyOwner {  
+    rewardAmounts\[1\] = CLASSIC\_REWARD;  
+    rewardAmounts\[2\] = FUNNY\_REWARD;  
+}
+```
+
+## 2\. Prevent Reentrancy Attacks
+
+The **withdrawBalance** function is vulnerable to reentrancy attacks ⚠️, where an attacker can re-enter the contract and withdraw multiple times before the state is updated.
+
+**Improvement**:
+
+*   Use the **Checks-Effects-Interactions** pattern to prevent reentrancy 🔄.
+*   Add a `reentrancyGuard` modifier.
+
+```js
+bool private locked;  
+  
+modifier reentrancyGuard() {  
+    require(!locked, "Reentrancy detected!");  
+    locked = true;  
+    \_;  
+    locked = false;  
+}  
+  
+function withdrawBalance() public reentrancyGuard {  
+    uint256 balance = creatorBalances\[msg.sender\];  
+    require(balance > 0, "No balance to withdraw!");  
+  
+    creatorBalances\[msg.sender\] = 0;  
+    (bool success, ) = payable(msg.sender).call{value: balance}("");  
+    require(success, "Failed to withdraw Ether balance");  
+  
+    emit BalanceWithdrawn(msg.sender, balance);  
+}
+```
+
+## 3\. Gas Optimization
+
+In Solidity, gas efficiency ⛽ is crucial. The **getJokes** function can be expensive 💸 since it loops through all jokes. To optimize gas usage: ⚡
+
+**Improvement**:
+
+*   Store an array of **non-deleted jokes** 📝 to avoid looping over all jokes each time.
+
+```js
+uint256\[\] public activeJokes;  
+  
+function createJoke(string memory \_setup, string memory \_punchline) public {  
+    jokes\[numberOfJokes\] = Joke(\_setup, \_punchline, msg.sender, false);  
+    activeJokes.push(numberOfJokes);  
+    emit JokeCreated(numberOfJokes, msg.sender);  
+    numberOfJokes++;  
+}  
+  
+function deleteJoke(uint256 \_jokeId) public {  
+    require(\_jokeId < numberOfJokes, "Invalid Joke ID or Index!");  
+    require(jokes\[\_jokeId\].creatorAddress == msg.sender, "Only the joke creator can delete the joke!");  
+    require(!jokes\[\_jokeId\].isDeleted, "Joke already removed!");  
+  
+    jokes\[\_jokeId\].isDeleted = true;  
+    emit JokeDeleted(\_jokeId);  
+}
+```
+
+By maintaining an `activeJokes` array, you can avoid looping through deleted jokes and instead provide a quick reference to all non-deleted jokes.
+
+## 4\. Use `SafeMath` for Arithmetic Operations
+
+Arithmetic operations in Solidity, like addition, can result in **overflows** or **underflows** 💥. To prevent this, use **SafeMath** ✅.
+
+**Improvement**:
+
+*   Import OpenZeppelin’s **SafeMath** library for safer arithmetic operations.
+
+```js
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";  
+  
+using SafeMath for uint256;  
+  
+function rewardJoke(uint256 \_jokeId, uint256 \_rewardType) public payable {  
+    require(\_jokeId < numberOfJokes, "Invalid Joke ID OR Index!");  
+    require(!jokes\[\_jokeId\].isDeleted, "Joke Removed!");  
+    require(\_rewardType >= 1 && \_rewardType <= 2, "Reward type must be between 1 and 2!");  
+  
+    uint256 rewardAmount = rewardAmounts\[\_rewardType\];  
+    require(msg.value == rewardAmount, "Incorrect reward amount!");  
+  
+    creatorBalances\[jokes\[\_jokeId\].creatorAddress\] = creatorBalances\[jokes\[\_jokeId\].creatorAddress\].add(rewardAmount);  
+    emit JokeRewarded(\_jokeId, \_rewardType, rewardAmount);  
+}
+```
+
+## 5\. Constructor for Initial Setup
+
+The **initializeRewards** function is used to set initial reward values 🏆. Instead of relying on a function that anyone can call, this should be moved to the constructor 🏗️ to ensure it’s set during deployment.
+
+**Improvement**:
+
+*   Use a **constructor** to initialize reward values.
+
+```js
+constructor() {  
+    owner = msg.sender;  
+    rewardAmounts\[1\] = CLASSIC\_REWARD;  
+    rewardAmounts\[2\] = FUNNY\_REWARD;  
+}
+```
+
+## 6\. Explicit Error Messages
+
+Providing explicit error messages helps both developers and users understand why a transaction failed 🚫. Solidity 0.8 introduced **custom errors**, which can save gas and provide more meaningful error descriptions.
+
+**Improvement**:
+
+*   Use **custom errors** for clearer error handling.
+
+```js
+error Unauthorized();  
+error InvalidJokeId(uint256 jokeId);  
+error InsufficientBalance();  
+  
+function deleteJoke(uint256 \_jokeId) public {  
+    if (\_jokeId >= numberOfJokes) {  
+        revert InvalidJokeId(\_jokeId);  
+    }  
+    if (jokes\[\_jokeId\].creatorAddress != msg.sender) {  
+        revert Unauthorized();  
+    }  
+    require(!jokes\[\_jokeId\].isDeleted, "Joke already removed!");  
+  
+    jokes\[\_jokeId\].isDeleted = true;  
+    emit JokeDeleted(\_jokeId);  
+}
+```
+
+## Conclusion
+
+Improving a smart contract isn’t just about adding new features 🌟, but also about refining its security 🔒, efficiency ⚡, and clarity 📝. By addressing reentrancy vulnerabilities, optimizing gas usage, adding access control, and using best practices like SafeMath, we can make our contracts safer and more maintainable.
+
+That wraps up our Clean Code Friday for today! 🎉 Remember, keeping your code secure and clean is a continuous journey 🚀, so let’s keep improving one function at a time. 💪 Happy coding! 🚀👨‍💻👩‍💻
