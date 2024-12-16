@@ -44,7 +44,7 @@ The Celo Alfajores testnet is a dynamic environment designed for developers to t
 
 Begin by importing the ethers.js library to your project:
 
-```
+```javascript
   
 const ethers = require('ethers');  
 
@@ -52,7 +52,7 @@ const ethers = require('ethers');
 
 Define the RPC URL for connecting to the Celo Alfajores testnet:
 
-```
+```javascript
   
 const rpcUrl = 'https://alfajores-forno.celo-testnet.org';  
 
@@ -62,7 +62,7 @@ Step 2: Connecting to the Network
 
 Create a provider to facilitate the connection to the Celo testnet:
 
-```
+```javascript
 const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 ```
 
@@ -70,7 +70,7 @@ Step 3: Setting Up the USDC Token Contract
 
 Identify and set up the USDC token contract address and ABI for interactions:
 
-```
+```javascript
 const usdcTokenAddress = '0x2F25deB3848C207fc8E0c34035B3Ba7fC157602B';  
 const minTokenAbi = \[…\];
 ```
@@ -79,7 +79,7 @@ const minTokenAbi = \[…\];
 
 Specify the sender and receiver addresses and the sender’s private key. Use placeholders for actual values to maintain security:
 
-```
+```javascript
 const fromAddress = 'YOUR\_FROM\_ADDRESS';  
 const toAddress = 'YOUR\_TO\_ADDRESS';  
 const privatekey = 'YOUR\_PRIVATE\_KEY';  
@@ -88,7 +88,7 @@ const amount = 1; // Number of USDC tokens to transfer
 
 Initialize the wallet and contract instances using the provided details:
 
-```
+```javascript
 const wallet = new ethers.Wallet(privatekey, provider);  
 const contract = new ethers.Contract(usdcTokenAddress, minTokenAbi, wallet);
 ```
@@ -97,14 +97,14 @@ const contract = new ethers.Contract(usdcTokenAddress, minTokenAbi, wallet);
 
 1\. Calculate the Transaction Amount: Convert the USDC amount to the smallest unit using the contract’s \`decimals\` which is 6 property:
 
-```
+```javascript
 const decimals = await contract.decimals();  
 const amountParsed = ethers.utils.parseUnits(amount.toString(), decimals);
 ```
 
 2\. Check Sender’s Balance: Ensure the sender has sufficient USDC for the transfer:
 
-```
+```javascript
 const balance = await contract.balanceOf(fromAddress);  
  console.log("Balance of Sender Before Transfer: ", ethers.utils.formatUnits(balance.toString(), decimals));  
  if (balance.lt(amountParsed)) {  
@@ -114,13 +114,13 @@ const balance = await contract.balanceOf(fromAddress);
 
 3\. Initiate the Transfer: Call the \`transfer\` method with the recipient’s address and the amount:
 
-```
+```javascript
 let tx = await contract.transfer(toAddress, amountParsed);
 ```
 
 4\. Confirm the Transaction: Wait for the transaction to be mined and retrieve the receipt:
 
-```
+```javascript
 let receipt = await tx.wait();  
 let url = \`https://alfajores.celoscan.io/tx/${receipt.transactionHash}\`;  
  console.log(\`Transaction ${receipt.transactionHash} confirmed, check it out at ${url}\`);
@@ -128,7 +128,7 @@ let url = \`https://alfajores.celoscan.io/tx/${receipt.transactionHash}\`;
 
 5\. Verify Balances: Confirm the transfer by checking both sender’s and receiver’s balances post-transaction:
 
-```
+```javascript
 // Sender's balance after transfer  
  const balanceAfter = await contract.balanceOf(fromAddress);  
  console.log("Balance of Sender After Transfer: ", ethers.utils.formatUnits(balanceAfter.toString(), decimals));  
