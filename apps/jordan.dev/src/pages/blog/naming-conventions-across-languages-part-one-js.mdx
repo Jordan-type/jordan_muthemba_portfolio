@@ -1,0 +1,101 @@
+---
+title: Naming Conventions Across Languages Part One Js
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Naming Conventions Across Languag...
+date: '2024-10-25'
+lang: en
+tags:
+ - ethers.js
+ - smartcontract
+ - cheat-sheet
+ - javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Naming Conventions Across Languages (part one JS)
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://jordanmuthemba.medium.com/?source=post_page---byline--d96065aa97ff--------------------------------)
+[![CoinsBench](https://miro.medium.com/v2/resize:fill:48:48/1*cxyieQYifV8lgCQjIXZ6ZQ.jpeg)](https://coinsbench.com/?source=post_page---byline--d96065aa97ff--------------------------------)
+
+[Jordan Type](https://jordanmuthemba.medium.com/?source=post_page---byline--d96065aa97ff--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fcoinsbench.com%2Fnaming-conventions-across-languages-part-one-js-d96065aa97ff&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--d96065aa97ff---------------------post_header-----------)
+
+Published in[CoinsBench](https://coinsbench.com/?source=post_page---byline--d96065aa97ff--------------------------------)·2 min read·Oct 25, 2024
+
+Writing clean code is more than just making the code work — it’s about making it readable, understandable, and maintainable. One of the key factors in writing clean code is **naming conventions**. Using consistent and meaningful names for variables, functions, and modules can help make your code more understandable not just for yourself, but for future developers who might work with your code.
+
+In this article, we’ll explore how to write **descriptive names** for variables, functions, and modules across four popular languages: **JavaScript, TypeScript, Solidity, and Python**. We’ll also discuss common naming conventions for each language, highlighting both similarities and differences.
+
+## Why Naming Conventions Matter
+
+Imagine you come across the following code:
+
+
+```js
+function f(x, y) {  
+    return x \* y;  
+}
+```
+
+Versus:
+
+```js
+function calculateTotalPrice(quantity, pricePerItem) {  
+    return quantity \* pricePerItem;  
+}
+```
+
+The second example is self-explanatory and immediately tells you what the function does. This is what clean code strives for — **clarity and intent**. When you read it, there is no guesswork about what the code does or how it works.
+
+Naming conventions help achieve this clarity. Let’s explore how these conventions apply in different languages.
+
+## Naming Conventions in JavaScript
+
+JavaScript is a dynamically typed language that is often used for both front-end and back-end development. Here are some best practices for naming conventions in JavaScript:
+
+## Variables
+
+**camelCase** is the standard for variable names:
+
+```js
+let totalAmount = 100;  
+let userName = "Jordan";
+```
+
+**Boolean variables** often start with `is`, `has`, or `should`:
+
+```js
+let isLoggedIn = true;  
+let hasPermissions = false;
+```
+
+## Functions
+
+**Function names** should be **action-oriented** and follow camelCase:
+
+```js
+function calculatePrice() {}  
+function fetchData() {}
+```
+
+If a function returns a boolean, start with `is`, `can`, or `has`:
+
+```js
+function isAuthenticated() {}
+```
+
+## Modules
+
+Modules or files should be **lowercase with dashes** if needed:
+
+```js
+user-controller.js  
+data-fetcher.js
+```

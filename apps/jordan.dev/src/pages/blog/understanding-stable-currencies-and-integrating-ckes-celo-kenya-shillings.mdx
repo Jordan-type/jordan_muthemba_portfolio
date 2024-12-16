@@ -1,0 +1,152 @@
+---
+title: Understanding Stable Currencies And Integrating Ckes Celo Kenya Shillings
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Understanding Stable Currencies A...
+date: '2024-08-29'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Understanding Stable Currencies and Integrating cKES (Celo Kenya Shillings)
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/?source=post_page---byline--a0714d526914--------------------------------)
+
+[Jordan Type](https://medium.com/?source=post_page---byline--a0714d526914--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fjordanmuthemba.medium.com%2Funderstanding-stable-currencies-and-integrating-ckes-celo-kenya-shillings-a0714d526914&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--a0714d526914---------------------post_header-----------)
+
+4 min read·Aug 29, 2024
+
+## Introduction to Stable Currencies
+
+Stable currencies, often referred to as stablecoins, are a class of cryptocurrencies that aim to provide price stability while maintaining the core benefits of digital assets like security, transparency, and decentralization. Unlike traditional cryptocurrencies such as Bitcoin or Ethereum, which are known for their volatility, stablecoins are typically pegged to a stable asset, such as a fiat currency (USD, EUR, KES), commodities (like gold), or a basket of assets.
+
+### Importance of Stable Currencies
+
+1.  **Price Stability**: Stablecoins are designed to maintain a stable value relative to a specific asset, providing a haven for investors during periods of high volatility in the broader cryptocurrency market. This stability is crucial for users looking to store value or conduct transactions without the risk of significant price fluctuations.
+2.  **Facilitation of Everyday Transactions**: Due to their stability, stablecoins are more suitable for everyday transactions and commerce than volatile cryptocurrencies. Users can buy goods and services, pay for subscriptions, or send remittances without worrying about sudden changes in value.
+3.  **Bridge to Decentralized Finance (DeFi)**: Stablecoins play a vital role in the DeFi ecosystem, providing a stable base for lending, borrowing, and trading on decentralized platforms. They offer a reliable means of collateralizing loans, staking, or providing liquidity without exposing users to high volatility risks.
+4.  **Financial Inclusion**: Stablecoins can serve as an entry point to financial services for unbanked and underbanked populations. They can be accessed by anyone with a smartphone and internet connection, enabling cross-border transactions and access to decentralized financial services.
+
+## Introducing cKES — Celo Kenya Shillings
+
+cKES, or Celo Kenya Shillings, is a stablecoin built on the Celo blockchain and pegged to the Kenyan Shilling (KES) value. cKES combines the stability of the KES with the benefits of blockchain technology, such as security, transparency, and decentralization. It aims to provide a digital alternative to traditional KES, facilitating seamless transactions, remittances, and access to DeFi services in Kenya and beyond.
+
+### Key Features of cKES
+
+*   **Pegged to the Kenyan Shilling**: The value of cKES is designed to mirror the value of the Kenyan Shilling, providing a familiar and stable digital currency for users in Kenya.
+*   **Built on Celo Blockchain**: cKES leverages the Celo blockchain, optimized for mobile use and financial inclusion. This makes cKES accessible to a wide audience, including those without traditional banking services.
+*   **Smart Contract Enabled**: cKES operates through smart contracts, enabling automated transactions, lending, and other DeFi applications without intermediaries.
+
+## Integrating cKES in Applications
+
+Integrating cKES into your application or platform involves interacting with the cKES smart contract on the Celo blockchain. Below are some key functions for integrating cKES using the `ethers.js` library:
+
+### 1\. Getting the cKES Balance of a Wallet
+
+To fetch the cKES balance of a wallet, you can use the `balanceOf` function from the cKES smart contract:
+
+```js
+const getcKESBalance = async (walletAddress) => {  
+ try {  
+ const balance = await cKESContract.balanceOf(walletAddress);  
+ console.log(\`Balance of ${walletAddress}: ${ethers.formatUnits(balance, 18)} cKES\`);  
+ return balance;  
+ } catch (error) {  
+ console.error("Error getting balance:", error);  
+ throw error;  
+ }  
+};
+```
+
+This function connects to the cKES smart contract and queries the balance for a specific wallet address. It formats the balance to a human-readable format using `ethers.formatUnits`.
+
+### 2\. Transferring cKES Between Users
+
+To transfer cKES tokens from one user to another, you can use the `transfer` function:
+
+```js
+const sendcKES = async (sender, receiver, amount, privateKey) => {  
+ try {  
+ const signer = new ethers.Wallet(privateKey, provider);  
+ const cKESWithSigner = cKESContract.connect(signer);  
+const tx = await cKESWithSigner.transfer(receiver, ethers.parseUnits(amount.toString(), 18));  
+ console.log(\`Transaction hash: ${tx.hash}\`);  
+await tx.wait(); // Wait for the transaction to be mined  
+ console.log(\`Transferred ${amount} cKES from ${sender} to ${receiver}\`);  
+ } catch (error) {  
+ console.error("Error sending cKES:", error);  
+ throw error;  
+ }  
+};
+```
+
+This function connects to the cKES smart contract using a wallet signer, allowing the sender to transfer cKES to the receiver securely.
+
+### 3\. Combined Approval and Transfer Function
+
+For scenarios where you want to approve a spender to spend cKES on behalf of the owner and immediately transfer tokens, you can use a combined function:
+
+```js
+const approveAndTransferFromcKES = async (ownerPrivateKey, spenderPrivateKey, from, to, amount) => {  
+ try {  
+ // Step 1: Approve the spender  
+ const ownerSigner = new ethers.Wallet(ownerPrivateKey, provider);  
+ const cKESWithOwnerSigner = cKESContract.connect(ownerSigner);  
+ 
+ console.log(\`Approving ${amount} cKES for spender ${spenderPrivateKey}…\`);  
+ const approveTx = await cKESWithOwnerSigner.approve(from, ethers.parseUnits(amount.toString(), 18));  
+ console.log(\`Approval transaction hash: ${approveTx.hash}\`);  
+ await approveTx.wait(); // Wait for the approval transaction to be mined  
+ console.log(\`Approved ${amount} cKES for spender ${spenderPrivateKey}\`);  
+ // Step 2: Transfer the cKES using transferFrom  
+ const spenderSigner = new ethers.Wallet(spenderPrivateKey, provider);  
+ const cKESWithSpenderSigner = cKESContract.connect(spenderSigner);  
+ console.log(\`Transferring ${amount} cKES from ${from} to ${to}…\`);  
+ const transferTx = await cKESWithSpenderSigner.transferFrom(from, to, ethers.parseUnits(amount.toString(), 18));  
+ console.log(\`TransferFrom transaction hash: ${transferTx.hash}\`);  
+ await transferTx.wait(); // Wait for the transfer transaction to be mined  
+ console.log(\`Transferred ${amount} cKES from ${from} to ${to} using spender ${spenderSigner.address}\`);  
+ } catch (error) {  
+ console.error("Error in approveAndTransferFromcKES:", error);  
+ throw error;  
+ } 
+   
+};
+```
+
+This function combines the `approve` and `transferFrom` steps to streamline the process, making it efficient and reducing the number of required transactions.
+
+### 4\. Getting the Total Supply of cKES
+
+To fetch the total supply of cKES tokens, you can use the `totalSupply` function:
+
+```js
+const getTotalSupply = async () => {  
+ try {  
+ const totalSupply = await cKESContract.totalSupply();  
+ console.log(\`Total supply of cKES: ${ethers.utils.formatUnits(totalSupply, 18)} cKES\`);  
+ return totalSupply;  
+ } catch (error) {  
+ console.error("Error getting total supply:", error);  
+ throw error;  
+ }  
+};
+```
+
+This function provides the total supply of cKES in circulation, which is crucial for understanding the token’s economics and supply dynamics.
+
+## Conclusion
+
+Stablecoins like cKES represent a significant advancement in the realm of digital finance. By offering stability, they enable everyday transactions, promote financial inclusion, and bridge traditional finance with decentralized finance. Integrating cKES into your application not only enhances its capabilities but also aligns with the growing demand for stable digital assets in Africa and beyond. With the provided code examples and integration steps, developers can seamlessly incorporate cKES into their platforms, fostering a more inclusive and efficient financial ecosystem.

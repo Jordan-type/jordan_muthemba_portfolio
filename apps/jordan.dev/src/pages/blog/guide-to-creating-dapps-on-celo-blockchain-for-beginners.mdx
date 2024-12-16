@@ -1,0 +1,117 @@
+---
+title: Guide To Creating Dapps On Celo Blockchain For Beginners
+description: A guide to common code snippets for interacting with Ethereum smart contracts using Guide To Creating Dapps On Celo B...
+date: '2021-04-02'
+lang: en
+tags:
+- ethers.js
+- smartcontract
+- cheat-sheet
+- javascript
+category: cheat-sheet
+---
+
+import CodeSnippet from '@/components/mdx/Code';
+import { DnD, Dont, Do } from '@/components/mdx/TIL';
+import { QuickView } from '@/components/mdx/Link';
+import CodeGroup from '@/components/mdx/CodeGroup';
+
+## Guide to creating Dapps on Celo Blockchain for Beginners
+
+### Part 1 (Smart Contract)
+
+[![Jordan Type](https://miro.medium.com/v2/resize:fill:88:88/0*-BxK6NvbOEXZ038-.)](https://medium.com/?source=post_page---byline--6d964197ee8a--------------------------------)
+
+[Jordan Type](https://medium.com/?source=post_page---byline--6d964197ee8a--------------------------------)
+
+·
+
+[Follow](https://medium.com/m/signin?actionUrl=https%3A%2F%2Fmedium.com%2F_%2Fsubscribe%2Fuser%2Fc405a7ae1c25&operation=register&redirect=https%3A%2F%2Fjordanmuthemba.medium.com%2Fguide-to-creating-dapps-on-celo-blockchain-for-beginners-6d964197ee8a&user=Jordan+Type&userId=c405a7ae1c25&source=post_page-c405a7ae1c25--byline--6d964197ee8a---------------------post_header-----------)
+
+4 min read·Apr 2, 2021
+
+**Introduction**
+
+**What is blockchain?**
+
+A **blockchain** or **cryptographic network** is a broad term used to describe a database maintained by a distributed set of computers that do not share a trust relationship or common ownership. This arrangement is referred to as **decentralized**. The content of a blockchain’s database, or **ledger**, authenticated using cryptographic techniques, preventing its contents from being added to, edited or removed except according to a protocol operated by the network as a whole.
+
+In the **simplest terms**, **Blockchain** can be described as a data structure that holds transactional records and while ensuring security, transparency, and decentralization. You can also think of it as a chain or records stored in the forms of blocks, which are controlled by no single authority.
+
+**What are** [**Decentralized Applications (or DApps)**](https://ethereum.stackexchange.com/questions/383/what-is-a-dapp)**?**
+
+[Decentralized Applications (or DApps)](https://ethereum.stackexchange.com/questions/383/what-is-a-dapp) are applications that do not rely on a centralized backend running in AWS or Azure that power traditional web and mobile applications. Instead, the application interacts directly with a blockchain, which can be thought of as a distributed cluster of nodes analogous to applications interacting directly with a “master-less” cluster of Cassandra nodes with full replication on every peer in an untrusted peer-to-peer network.
+
+**What is Celo Blockchain?**
+
+An open cryptographic protocol that allows applications to make transactions with and run smart contracts in a secure and decentralized fashion.
+
+**What are Smart Contracts?**
+
+Are lines of code that are stored on a **blockchain** and automatically execute when predetermined terms and conditions are met. The smart contracts are defined using a language called Solidity.
+
+## Tutorial for Building an DApp
+
+Now that you have some background on Celo DApps, let us walk through the tutorial.
+
+We will use [Truffle Framework](http://truffleframework.com/), which provides a set of tools and boilerplate code for scaffolding DApps for Celo. Before we dive in, let us go through some of the considerations.
+
+1\. Does your Dapp have an UI?
+
+Dapps often have a UI component such as web and mobile. Moreover, Celo uses a mobile first approach then it is ideal to have one since it is a way for humans to interact with the smart contract on the network
+
+2\. Have you designed your Smart Contract?
+
+Smart contract defines the rules of your Dapp that runs on the Celo Blockchain. It is good practice to avoid putting unnecessary logic into your Smart Contracts as the gas to run its execution can be very expensive. We will start with a simple helloworld.sol
+
+3\. What about the test environment?
+
+Since any write transaction on a smart contract will cost a gas, you will need a test network to avoid this. Celo provides official test networks (Alfajores **Testnet,** Baklava Testnet) be pre configured on the boilerplate.
+
+**Systematic Guide**
+
+**1.** **Install Yarn, Node.js and Truffle framework.**
+
+· [https://classic.yarnpkg.com/en/docs/install/#windows-stable](https://classic.yarnpkg.com/en/docs/install/#windows-stable)
+
+· [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+· npm install –g truffle
+
+**2.** **Generate the boilerplate code.**
+
+$ truffle unbox critesjosh/celo-dappkit
+
+This should generate a set of files and folders. There are a few folders to pay attention to:
+
+· Client/ folder is where the react native code is stored.
+
+· Contracts/ folder is where the smart contracts written in solidity are stored. Notice the HelloWorld.sol file I had mentioned above.
+
+· Migrations/ are scripts to manage deployment of contracts onto the Celo network.
+
+· Utils / are scripts to manage and create a Celo account address to help in deployment of the smart contract.
+
+**3.** **Start the Smart contract development**
+
+Since the project comes with a hello world example contract in the contracts folder. The boilerplate/box is pre-configured to deploy solidity smart contract to Aflajores test network. Note: You will need to test network funds to pay for deployments costs.
+
+Run
+
+$ npm run account
+
+The above command creates a new account that also generates a private key for you and stores it in /.secret.
+
+Copy your wallet Address and paste it into the Alfajores faucet to fund your account.
+
+Alfajores faucet
+
+**4.** **Deploying the Contract**
+
+You can migrate the HelloWorld.sol contract to the Alfajores test network with the command below:
+
+$ truffle migrate — network alfajores
+
+truffle migrate — network alfajores
+
+Once deployed to the test network truffle will save the deployment information to the Truffle artifact located at client/contracts/HelloWorld.json. You will use this deployment information to connect your React Native application to the correct contract.
